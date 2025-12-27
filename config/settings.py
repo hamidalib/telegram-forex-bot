@@ -6,7 +6,7 @@ API_HASH = "ed0d3a942db2091a06cd7cc20ca4546e"
 SESSION_NAME = "signal_reader"
 
 # ───────── TARGET CHANNEL ─────────
-SOURCE_CHANNEL = "train2trade16"
+SOURCE_CHANNEL = "autotradeexecutor"
 
 # ───────── FORWARD TO USER ─────────
 FORWARD_TO = "me"  # we’ll change later if needed
