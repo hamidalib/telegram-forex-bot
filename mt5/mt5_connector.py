@@ -12,10 +12,10 @@ MAX_OPEN_TRADES = 3
 open_trades = []
 
 
-def simulate_trade(signal_text: str):
+def simulate_trade(signal_input):
     """
     Simulate executing a trade:
-    - Parse & validate
+    - Parse & validate (if string) or validate (if dict)
     - Calculate risk %
     - Check max open trades
     - Print trade details
@@ -23,7 +23,15 @@ def simulate_trade(signal_text: str):
     try:
         # Parse & validate
         from signals.parser import parse_signal
-        signal = parse_signal(signal_text)
+        
+        # Accept both string (raw signal) and dict (parsed signal)
+        if isinstance(signal_input, str):
+            signal = parse_signal(signal_input)
+        elif isinstance(signal_input, dict):
+            signal = signal_input
+        else:
+            raise ValueError("Signal must be string or dict")
+        
         validate_signal(signal)
     except ValueError as e:
         print(f"❌ Signal skipped: {e}")

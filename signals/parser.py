@@ -43,7 +43,7 @@ def parse_signal(text: str) -> Dict:
         else:
             low = float(low_part)
 
-        entry = [high, low]
+        entry = [low, high]  # Return as [low, high]
     else:
         entry_single = re.search(r"\b(\d{3,5})\b", text)
         if entry_single:
@@ -63,7 +63,8 @@ def parse_signal(text: str) -> Dict:
         raise ValueError("TP not found")
 
     tp_values = tp_match.group(1).split("-")
-    tp = [float(v) for v in tp_values if v.isdigit()]
+    tp_list = [float(v) for v in tp_values if v.isdigit()]
+    tp = [tp_list[0]] if tp_list else []  # Return only the first TP value
 
     return {
         "symbol": symbol,
